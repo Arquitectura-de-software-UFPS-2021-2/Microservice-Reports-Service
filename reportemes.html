@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <script src="index.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        let meses = {
+            1: 'Enero',
+            2: 'Febrero',
+            3: 'Marzo',
+            4: 'Abril',
+            5: 'Mayo',
+            6: 'Junio',
+            7: 'Julio',
+            8: 'Agosto',
+            9: 'Septiembre',
+            10: 'Octubre',
+            11: 'Noviembre',
+            12: 'Diciembre',
+        }
+        let anio = '2021';
+        let title = 'Ingreso de usuarios del año ' + anio;
+        let dataMeses = getEstudiantesPorMes(anio);
+        let dataGrafico = [
+            ['Mes', 'Cantidad de usuarios'],
+        ];
+        for (const key in dataMeses) {
+            if (Object.hasOwnProperty.call(dataMeses, key)) {
+                if (key != 'sinFecha')
+                    dataGrafico.push([meses[key], dataMeses[key].length]);
+            }
+        }
+        console.log(dataGrafico)
+        google.charts.setOnLoadCallback(() => drawChart(dataGrafico, title));
+
+        function drawChart(dataGrafico = [
+            ['Task', 'Hours per Day'],
+            ['Work', 11],
+            ['Eat', 2],
+            ['Commute', 2],
+            ['Watch TV', 2],
+            ['Sleep', 7]
+        ], title = 'My Daily Activities') {
+            var data = google.visualization.arrayToDataTable(dataGrafico);
+            var options = {
+                title,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+
+<body class="bg-gray-100">
+    <main class="py-12 mx-auto w-11/12 md:w-5/6 bg-gray-100 flex">
+        <aside class="w-3/12 mr-4">
+            <div class="rounded-md p-2 flex items-center bg-red-700 px-12 mb-4">
+                <p class="text-center text-white">
+                    Reportes de usuario
+                </p>
+            </div>
+            <div class="bg-white p-4 rounded-md">
+                <h4 class="text-center font-bold">Tipos de reporte</h4>
+                <ul class="mt-4">
+                    <li class="bg-red-100 hover:bg-red-300 p-2 rounded-md mb-2">
+                        <a class="flex w-full justify-center" href="reporteanio.html">Reporte por año</a>
+                    </li>
+                    <li class="bg-red-100 hover:bg-red-300 p-2 rounded-md mb-2">
+                        <a class="flex w-full justify-center" href="reportemes.html">Reporte por mes</a>
+                    </li>
+                    <li class="bg-red-100 hover:bg-red-300 p-2 rounded-md mb-2">
+                        <a class="flex w-full justify-center" href="reportesemana.html">Reporte por semana</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <section class="w-9/12 flex overflow-hidden">
+            <article class="bg-red-100 p-6 rounded-md w-full">
+                <p class="text-center font-bold mb-4 text-2xl">Reportes por Mes</p>
+                <div class="flex w-full">
+                    <div class="flex justify-center w-full">
+                        <div class="mb-3 md:w-1/2">
+                            <b>Filtrar por mes</b>
+                            <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                                <option selected>Seleccionar</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 md:w-1/2 ml-4">
+                            <b>Filtrar por año</b>
+                            <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                                <option selected>Seleccionar</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-red-100" id="piechart" style="width: 100%; height: 500px;"></div>
+                <div class="flex">
+                    <button onclick="generarPDF()" type="button" class="px-3 h-10 bg-red-500 text-white mr-2"><i class="text-xl far fa-file-pdf"></i></button>
+                    <button id="btnExportar" type="button" class="px-3 h-10 bg-green-700 text-white"><i class="text-xl far fa-file-excel"></i></button>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <div id="content" hidden>
+        <!-- el contenido HTML va aqui -->
+        <table id="tabla" class="default">
+            <tr>
+                <th>Hoy</th>
+                <th>Mañana</th>
+                <th>Viernes</th>
+            </tr>
+            <tr>
+                <td>Soleado</td>
+                <td>Mayormente soleado</td>
+                <td>Parcialmente nublado</td>
+            </tr>
+            <tr>
+                <td>19°C</td>
+                <td>17°C</td>
+                <td>12°C</td>
+            </tr>
+            <tr>
+                <td>E 13 km/h</td>
+                <td>E 11 km/h</td>
+                <td>S 16 km/h</td>
+            </tr>
+        </table>
+    </div>
+    <div id="elementH"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jsPDF-1.3.2/dist/jspdf.min.js"></script>
+    <script src="https://unpkg.com/xlsx@latest/dist/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/file-saverjs@latest/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/tableexport@latest/dist/js/tableexport.min.js"></script>
+    <script>
+        //Crear PDF
+        function generarPDF() {
+            var doc = new jsPDF();
+            var elementHTML = $('#content').html();
+            var specialElementHandlers = {
+                '#elementH': function(element, renderer) {
+                    return true;
+                }
+            };
+            doc.fromHTML(elementHTML, 15, 15, {
+                'width': 170,
+                'elementHandlers': specialElementHandlers
+            });
+            doc.save('sample-document.pdf');
+        }
+        //Crear PDF
+        //Crear Excel
+        const $btnExportar = document.querySelector("#btnExportar"),
+            $tabla = document.querySelector("#tabla");
+
+        $btnExportar.addEventListener("click", function() {
+            let tableExport = new TableExport($tabla, {
+                exportButtons: false, // No queremos botones
+                filename: "sample-document", //Nombre del archivo de Excel
+                sheetname: "sample-document", //Título de la hoja
+            });
+            let datos = tableExport.getExportData();
+            let preferenciasDocumento = datos.tabla.xlsx;
+            tableExport.export2file(preferenciasDocumento.data, preferenciasDocumento.mimeType, preferenciasDocumento.filename, preferenciasDocumento.fileExtension, preferenciasDocumento.merges, preferenciasDocumento.RTL, preferenciasDocumento.sheetname);
+        });
+        //Crear Excel
+    </script>
+</body>
+
+</html>
