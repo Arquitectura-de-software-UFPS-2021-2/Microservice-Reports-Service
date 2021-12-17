@@ -7,57 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <script src="index.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {
-            'packages': ['corechart']
-        });
-        let meses = {
-            1: 'Enero',
-            2: 'Febrero',
-            3: 'Marzo',
-            4: 'Abril',
-            5: 'Mayo',
-            6: 'Junio',
-            7: 'Julio',
-            8: 'Agosto',
-            9: 'Septiembre',
-            10: 'Octubre',
-            11: 'Noviembre',
-            12: 'Diciembre',
-        }
-        let anio = '2021';
-        let title = 'Ingreso de usuarios del año ' + anio;
-        let dataMeses = getEstudiantesPorMes(anio);
-        let dataGrafico = [
-            ['Mes', 'Cantidad de usuarios'],
-        ];
-        for (const key in dataMeses) {
-            if (Object.hasOwnProperty.call(dataMeses, key)) {
-                if (key != 'sinFecha')
-                    dataGrafico.push([meses[key], dataMeses[key].length]);
-            }
-        }
-        console.log(dataGrafico)
-        google.charts.setOnLoadCallback(() => drawChart(dataGrafico, title));
-
-        function drawChart(dataGrafico = [
-            ['Task', 'Hours per Day'],
-            ['Work', 11],
-            ['Eat', 2],
-            ['Commute', 2],
-            ['Watch TV', 2],
-            ['Sleep', 7]
-        ], title = 'My Daily Activities') {
-            var data = google.visualization.arrayToDataTable(dataGrafico);
-            var options = {
-                title,
-            };
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-            chart.draw(data, options);
-        }
-    </script>
 </head>
 
 <body class="bg-gray-100">
@@ -88,22 +37,14 @@
                 <p class="text-center font-bold mb-4 text-2xl">Reportes por Mes</p>
                 <div class="flex w-full">
                     <div class="flex justify-center w-full">
-                        <div class="mb-3 md:w-1/2">
-                            <b>Filtrar por mes</b>
-                            <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
-                                <option selected>Seleccionar</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
                         <div class="mb-3 md:w-1/2 ml-4">
                             <b>Filtrar por año</b>
-                            <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                            <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                id="selectAnio" onchange="generarGrafico()">
                                 <option selected>Seleccionar</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
                             </select>
                         </div>
                     </div>
@@ -149,6 +90,8 @@
     <script src="https://unpkg.com/xlsx@latest/dist/xlsx.full.min.js"></script>
     <script src="https://unpkg.com/file-saverjs@latest/FileSaver.min.js"></script>
     <script src="https://unpkg.com/tableexport@latest/dist/js/tableexport.min.js"></script>
+    <script src="index.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
         //Crear PDF
         function generarPDF() {
@@ -181,6 +124,59 @@
             tableExport.export2file(preferenciasDocumento.data, preferenciasDocumento.mimeType, preferenciasDocumento.filename, preferenciasDocumento.fileExtension, preferenciasDocumento.merges, preferenciasDocumento.RTL, preferenciasDocumento.sheetname);
         });
         //Crear Excel
+        // Crear Graficos
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+
+        function drawChart(dataGrafico = [
+            ['Task', 'Hours per Day'],
+            ['Work', 11],
+            ['Eat', 2],
+            ['Commute', 2],
+            ['Watch TV', 2],
+            ['Sleep', 7]
+        ], title = 'My Daily Activities') {
+            var data = google.visualization.arrayToDataTable(dataGrafico);
+            var options = {
+                title,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+        // Crear Graficos
+        function generarGrafico() {
+            let anio = document.getElementById('selectAnio').value
+            if (anio !== "Seleccionar") {
+                let meses = {
+                    1: 'Enero',
+                    2: 'Febrero',
+                    3: 'Marzo',
+                    4: 'Abril',
+                    5: 'Mayo',
+                    6: 'Junio',
+                    7: 'Julio',
+                    8: 'Agosto',
+                    9: 'Septiembre',
+                    10: 'Octubre',
+                    11: 'Noviembre',
+                    12: 'Diciembre',
+                }
+
+                let title = 'Ingreso de usuarios del año ' + anio;
+                let dataMeses = getEstudiantesPorMes(anio);
+                let dataGrafico = [
+                    ['Mes', 'Cantidad de usuarios'],
+                ];
+                for (const key in dataMeses) {
+                    if (Object.hasOwnProperty.call(dataMeses, key)) {
+                        if (key != 'sinFecha')
+                            dataGrafico.push([meses[key], dataMeses[key].length]);
+                    }
+                }
+                google.charts.setOnLoadCallback(() => drawChart(dataGrafico, title));
+            }
+        }
     </script>
 </body>
 
