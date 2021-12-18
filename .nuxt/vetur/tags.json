@@ -1,0 +1,14 @@
+{
+  "Aside": {
+    "description": "Auto imported from components/Aside.vue"
+  },
+  "DescargaReportes": {
+    "description": "Auto imported from components/DescargaReportes.vue"
+  },
+  "Grafica": {
+    "description": "Auto imported from components/Grafica.vue"
+  },
+  "SelectoresFechas": {
+    "description": "Auto imported from components/SelectoresFechas.vue"
+  }
+}
