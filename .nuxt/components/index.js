@@ -1,7 +1,7 @@
-export { default as Aside } from '../../components/Aside.vue'
-export { default as DescargaReportes } from '../../components/DescargaReportes.vue'
-export { default as Grafica } from '../../components/Grafica.vue'
-export { default as SelectoresFechas } from '../../components/SelectoresFechas.vue'
+export { default as Aside } from '../..\\components\\Aside.vue'
+export { default as DescargaReportes } from '../..\\components\\DescargaReportes.vue'
+export { default as Grafica } from '../..\\components\\Grafica.vue'
+export { default as SelectoresFechas } from '../..\\components\\SelectoresFechas.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

@@ -181,98 +181,19 @@ export default {
   methods: {
     obtenerUsuarios() {
       axios
-      .get('https://pokeapi.co/api/v2/pokemon/')
+      .post('http://18.235.152.56/students',{
+        api_token:"1YqP9uuhPc4SG5U0W730LW6H5TrANEktvAZDWdE1T3nZxpb8kgD0OWTTyDencgCMHIlUhlQ4U27sISSSjaP8tKRsz2xdxJWIq5oxFv8voAJPqeHHJQ8crprPIZBwz93dE04REdOFebV0aUFKyiwDYX"
+      })
       .then((response) => {
-       //this.usuarios = response.data
-        console.warn(response.data.results)
+        this.usuarios = response.data.data
       })
       .catch((error) => {
         console.warn(response)
       })
-      const usuariosTest = [
-        {
-            "code": 1151595,
-            "name": "Cristian",
-            "last_name": "camargo",
-            "address": "calle 23",
-            "age": "21",
-            "phone": "14131",
-            "email": "totobhcc@gmail.com",
-            "semester": "decimo",
-            "university_career": "ing. sistemas",
-            "created_at": "2021-11-12T01:43:56.000000Z",
-            "updated_at": "2021-11-12T01:43:56.000000Z"
-        },
-        {
-            "code": 1151636,
-            "name": "Jairo",
-            "last_name": "garcia",
-            "address": "calle 23",
-            "age": "21",
-            "phone": "14131",
-            "email": "sebastian@gmail.com",
-            "semester": "decimo",
-            "university_career": "ing. sistemas",
-            "created_at": "2021-10-12T19:32:06.000000Z",
-            "updated_at": "2021-10-12T19:32:06.000000Z"
-        },
-        {
-            "code": 1151636,
-            "name": "sebastian",
-            "last_name": "garcia",
-            "address": "calle 23",
-            "age": "21",
-            "phone": "14131",
-            "email": "sebastian@gmail.com",
-            "semester": "decimo",
-            "university_career": "ing. sistemas",
-            "created_at": "2022-10-12T19:32:06.000000Z",
-            "updated_at": "2022-10-12T19:32:06.000000Z"
-        },
-        {
-            "code": 1151650,
-            "name": "Pedro",
-            "last_name": "garcia",
-            "address": "calle 23",
-            "age": "21",
-            "phone": "14131",
-            "email": "gabrielarturo@gil.com",
-            "semester": "decimo",
-            "university_career": "ing. sistemas",
-            "created_at": "2021-12-12T23:08:55.000000Z",
-            "updated_at": "2021-12-12T23:08:55.000000Z"
-        },
-        {
-            "code": 1151651,
-            "name": "Jose",
-            "last_name": "garcia",
-            "address": "calle 23",
-            "age": "21",
-            "phone": "14131",
-            "email": "gabrielarturo@gmail.com",
-            "semester": "decimo",
-            "university_career": "ing. sistemas",
-            "created_at": "2021-12-07T21:10:38.000000Z",
-            "updated_at": "2021-12-07T21:10:38.000000Z"
-        },
-        {
-            "code": 1151698,
-            "name": "arturo",
-            "last_name": "quintero",
-            "address": "calle 23",
-            "age": "21",
-            "phone": "14131",
-            "email": "arturo@gmail.com",
-            "semester": "decimo",
-            "university_career": "ing. sistemas",
-            "created_at": "2021-12-13T15:44:54.000000Z",
-            "updated_at": "2021-12-13T15:44:54.000000Z"
-        }
-      ]
-      this.usuarios = usuariosTest
+      //this.usuarios = []
     },
     filtrarUsuarios() {
-      const filtroUsuarios = this.usuarios.filter(item => (item.created_at.split('T')[0] <= this.dateFin) && (item.created_at.split('T')[0] >= this.dateInicio))
+      const filtroUsuarios = this.usuarios.filter(item => item.created_at !== null?(item.created_at.split('T')[0] <= this.dateFin) && (item.created_at.split('T')[0] >= this.dateInicio):'')
       this.usuariosFiltrados = filtroUsuarios
     },
     establecerHoy () {

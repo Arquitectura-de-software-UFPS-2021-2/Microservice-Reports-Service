@@ -2,22 +2,22 @@
   {
     "name": "descargas",
     "path": "/descargas",
-    "component": "/home/jbecerra/Escritorio/proyectos-julian/VueJS/reports-nuxjs/Microservice-Reports-Service/pages/descargas.vue",
+    "component": "D:\\\\Desktop\\\\Microservice-Reports-Service\\\\pages\\\\descargas.vue",
     "chunkName": "pages/descargas",
-    "_name": "_16db5786"
+    "_name": "_b3a3b334"
   },
   {
     "name": "graficas",
     "path": "/graficas",
-    "component": "/home/jbecerra/Escritorio/proyectos-julian/VueJS/reports-nuxjs/Microservice-Reports-Service/pages/graficas.vue",
+    "component": "D:\\\\Desktop\\\\Microservice-Reports-Service\\\\pages\\\\graficas.vue",
     "chunkName": "pages/graficas",
-    "_name": "_53404f7d"
+    "_name": "_78e8249d"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/home/jbecerra/Escritorio/proyectos-julian/VueJS/reports-nuxjs/Microservice-Reports-Service/pages/index.vue",
+    "component": "D:\\\\Desktop\\\\Microservice-Reports-Service\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
-    "_name": "_041ab141"
+    "_name": "_68301fbe"
   }
 ]
