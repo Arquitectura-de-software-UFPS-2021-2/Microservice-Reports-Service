@@ -140,7 +140,7 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 export default {
   name: 'SelectoresFechas',
 
@@ -180,7 +180,15 @@ export default {
   },
   methods: {
     obtenerUsuarios() {
-      //consultar endpoint
+      axios
+      .get('https://pokeapi.co/api/v2/pokemon/')
+      .then((response) => {
+       //this.usuarios = response.data
+        console.warn(response.data.results)
+      })
+      .catch((error) => {
+        console.warn(response)
+      })
       const usuariosTest = [
         {
             "code": 1151595,
