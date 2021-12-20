@@ -1,5 +1,8 @@
 # report-nuxt
 
+# Application deployment
+(http://reports-services.herokuapp.com/).
+
 ## Build Setup
 
 ```bash
