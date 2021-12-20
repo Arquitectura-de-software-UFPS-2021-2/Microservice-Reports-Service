@@ -97,13 +97,26 @@
         <div v-if="usuariosFiltrados.length > 0">
             <div style="display: flex;justify-content: center;" class="mt-15">
               <v-btn
-                :loading="loading3"
-                :disabled="loading3"
                 color="red"
                 class="ma-2 white--text"
                 @click="descargarPDf(dateInicio, dateFin)"
               >
                 Descargar PDF
+                <v-icon
+                  right
+                  dark
+                >
+                  mdi-cloud-download
+                </v-icon>
+              </v-btn>
+            </div>
+            <div style="display: flex;justify-content: center;" class="mt-15">
+              <v-btn
+                color="green"
+                class="ma-2 white--text"
+                @click="exportExcel"
+              >
+                Descargar Excel
                 <v-icon
                   right
                   dark
@@ -144,6 +157,7 @@
 </template>
 
 <script>
+import XLSX from "xlsx"
 import html2canvas from "html2canvas"
 import jsPDF from "jspdf"
 import axios from 'axios'
@@ -169,7 +183,7 @@ export default {
       { text: 'Email', value: 'email' },
       { text: 'Semestre', value: 'semester' },
       { text: 'Carrera', value: 'university_career' }
-    ],
+    ]
   }),
   created () {
     this.establecerHoy(),
@@ -319,7 +333,14 @@ export default {
           pdf.save(`report ${ inicio } to ${ fin }.pdf`)
         }
       })
-    }
+    },
+    exportExcel () {
+      let data = XLSX.utils.json_to_sheet(this.usuariosFiltrados)
+      const workbook = XLSX.utils.book_new()
+      const filename = `report ${ this.dateInicio } to ${ this.dateFin }`
+      XLSX.utils.book_append_sheet(workbook, data, filename)
+      XLSX.writeFile(workbook, `${filename}.xlsx`)
+    },
   },
 };
 </script>
