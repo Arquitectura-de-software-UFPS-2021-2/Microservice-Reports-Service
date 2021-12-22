@@ -1,7 +1,7 @@
-export { default as Aside } from '../..\\components\\Aside.vue'
-export { default as DescargaReportes } from '../..\\components\\DescargaReportes.vue'
-export { default as Grafica } from '../..\\components\\Grafica.vue'
-export { default as SelectoresFechas } from '../..\\components\\SelectoresFechas.vue'
+export const Aside = () => import('../..\\components\\Aside.vue' /* webpackChunkName: "components/aside" */).then(c => wrapFunctional(c.default || c))
+export const DescargaReportes = () => import('../..\\components\\DescargaReportes.vue' /* webpackChunkName: "components/descarga-reportes" */).then(c => wrapFunctional(c.default || c))
+export const Grafica = () => import('../..\\components\\Grafica.vue' /* webpackChunkName: "components/grafica" */).then(c => wrapFunctional(c.default || c))
+export const SelectoresFechas = () => import('../..\\components\\SelectoresFechas.vue' /* webpackChunkName: "components/selectores-fechas" */).then(c => wrapFunctional(c.default || c))
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

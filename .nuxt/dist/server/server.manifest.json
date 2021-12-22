@@ -1,0 +1,21 @@
+{
+  "entry": "server.js",
+  "files": {
+    "components/descarga-reportes.js": "components/descarga-reportes.js",
+    "components/grafica.js": "components/grafica.js",
+    "components/selectores-fechas.js": "components/selectores-fechas.js",
+    "pages/descargas.js": "pages/descargas.js",
+    "pages/graficas.js": "pages/graficas.js",
+    "pages/index.js": "pages/index.js",
+    "server.js": "server.js"
+  },
+  "maps": {
+    "components/descarga-reportes.js": "components/descarga-reportes.js.map",
+    "components/grafica.js": "components/grafica.js.map",
+    "components/selectores-fechas.js": "components/selectores-fechas.js.map",
+    "pages/descargas.js": "pages/descargas.js.map",
+    "pages/graficas.js": "pages/graficas.js.map",
+    "pages/index.js": "pages/index.js.map",
+    "server.js": "server.js.map"
+  }
+}

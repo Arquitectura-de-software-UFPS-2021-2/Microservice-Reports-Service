@@ -202,7 +202,7 @@ export default {
     obtenerUsuarios() {
       axios
       .post('http://18.235.152.56/students',{
-        api_token:"1YqP9uuhPc4SG5U0W730LW6H5TrANEktvAZDWdE1T3nZxpb8kgD0OWTTyDencgCMHIlUhlQ4U27sISSSjaP8tKRsz2xdxJWIq5oxFv8voAJPqeHHJQ8crprPIZBwz93dE04REdOFebV0aUFKyiwDYX"
+        api_token:"Uhln2BZLQO6FcC0peIBSVmMNqA2KicvYhAXBepBVAZwRVwBxhnayKuQIb5sPYBEVRG7aXlYBQsNnTxNGzm6Z7eE4z18nowIKXW4rc9yCLuSvdahh0z5tuUH0yCO5fwJFG8hq3PcWuSdNMc0mUVKtSz"
       })
       .then((response) => {
         this.usuarios = response.data.data
